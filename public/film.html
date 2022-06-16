@@ -60,19 +60,19 @@
       <div class="container">
         <div class="screen"></div>
   
-        <div class="row" id="A" v-if="filterSections[0] == true">
+        <div class="row" id="A" v-if="filterSections[0] == true"><span>A</span>
           <div class="seat" v-for="(item, index) in 10" :key="index" v-bind:id="item" style="color: whitesmoke;" onclick="bookSeat(this.id)"> {{item}} </div>
         </div>
-        <div class="row" id="B" v-if="filterSections[1] == true">
+        <div class="row" id="B" v-if="filterSections[1] == true"><span>B</span>
           <div class="seat" v-for="(item, index) in 10" :key="index" v-bind:id="item + 10" style="color: whitesmoke;" onclick="bookSeat(this.id)"> {{item + 10}} </div>
         </div>
-        <div class="row" id="C" v-if="filterSections[2] == true">
+        <div class="row" id="C" v-if="filterSections[2] == true"><span>C</span>
           <div class="seat" v-for="(item, index) in 10" :key="index" v-bind:id="item + 20" style="color: whitesmoke;" onclick="bookSeat(this.id)"> {{item + 20}} </div>
         </div>
-        <div class="row" id="D" v-if="filterSections[3] == true">
+        <div class="row" id="D" v-if="filterSections[3] == true"><span>D</span>
           <div class="seat" v-for="(item, index) in 10" :key="index" v-bind:id="item + 30" style="color: whitesmoke;" onclick="bookSeat(this.id)"> {{item + 30}} </div>
         </div>
-        <div class="row" id="E" v-if="filterSections[4] == true">
+        <div class="row" id="E" v-if="filterSections[4] == true"><span>E</span>
           <div class="seat" v-for="(item, index) in 10" :key="index" v-bind:id="item + 40" style="color: whitesmoke;" onclick="bookSeat(this.id)"> {{item + 40}} </div>
         </div>
       </div>
