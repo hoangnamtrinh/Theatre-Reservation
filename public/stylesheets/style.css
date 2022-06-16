@@ -13,7 +13,7 @@ a {
 }
 
 .show img {
-  height: 80px;
+  height: 200px;
   width: auto;
   margin-left: 30px;
 }
@@ -36,7 +36,8 @@ a {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  height: 50%;
+  height: 90%;
+  /* width: 70%; */
 }
 
 .seats {

@@ -26,7 +26,7 @@ router.get('/getplays', function(req, res, next) {
   // res.json(plays);
 });
 
-router.get('/getplay', function(req, res, next) {
+router.post('/getplay', function(req, res, next) {
     //Connect to the database
     req.pool.getConnection( function(err,connection) {
       if (err) {
@@ -34,7 +34,7 @@ router.get('/getplay', function(req, res, next) {
         return;
       }
       var query = "SELECT * FROM Play WHERE ID = ?";
-      connection.query(query, [req.session.play_id], function(err, rows, fields) {
+      connection.query(query, [req.body.play_id], function(err, rows, fields) {
         connection.release(); // release connection
         if (err) {
           res.sendStatus(500);
@@ -52,17 +52,46 @@ router.get('/play/:id', function(req, res, next) {
   res.send();
 });
 
-var dates = ['a', 'b'];
-router.get('/getdate', function(req, res, next) {
-  // var film_id = res.params.id;
-  res.json(dates);
+// var dates = ['a', 'b'];
+router.post('/getdate', function(req, res, next) {
+  //Connect to the database
+  req.pool.getConnection( function(err,connection) {
+    if (err) {
+      res.sendStatus(500);
+      return;
+    }
+    var query = "SELECT * FROM Showtime WHERE Play_ID = ?";
+    connection.query(query, [req.body.play_id], function(err, rows, fields) {
+      connection.release(); // release connection
+      if (err) {
+        res.sendStatus(500);
+        return;
+      }
+      res.json(rows); //send response
+    });
+  });
+  // res.json(dates);
   // res.sendFile('/film.html');
 });
 
-var times = ['a', 'b'];
-router.get('/gettime', function(req, res, next) {
-  // var film_id = res.params.id;
-  res.json(times);
+// var times = ['a', 'b'];
+router.post('/gettime', function(req, res, next) {
+  req.pool.getConnection( function(err,connection) {
+    if (err) {
+      res.sendStatus(500);
+      return;
+    }
+    var query = "SELECT * FROM Showtime WHERE Play_ID = ? AND Date= ?";
+    connection.query(query, [req.body.play_id, req.body.date], function(err, rows, fields) {
+      connection.release(); // release connection
+      if (err) {
+        res.sendStatus(500);
+        return;
+      }
+      res.json(rows); //send response
+    });
+  });
+  // res.json(times);
   // res.sendFile('film.html');
 });
 

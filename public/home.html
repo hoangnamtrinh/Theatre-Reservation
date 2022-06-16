@@ -7,9 +7,10 @@
 </head>
 
 <body>
-  <h1>Lists</h1>
+
   <div id="main">
-  <div id="app">
+  <div id="app" v-if="show_reservation">
+  <h1>Lists</h1>
 
 
     <div id="shows">
@@ -18,12 +19,13 @@
         <div class="show-content"><h3> {{ play.Name }} </h3>
           <p></p><p>Fri 17 Jun - Sat 18 Jun 2022</p><p>Adelaide Festival Centre, Adelaide SA</p>
         </div>
-        <div class="show-button"><button v-bind:id="play.ID" v-on:click="show_reservation = true" onclick="getPlay(this.id)">Reserve</button></div>
+        <div class="show-button"><button v-bind:id="play.ID" v-on:click="getPlay(), getDate()" onclick="vueinst1.play_id = this.id;vueinst1.show_reservation = false">Reserve</button></div>
       </div>
     </div>
   </div>
 
-  <div id="main" v-if="show_reservation">
+  <div v-else="show_reservation">
+  <h1>Play</h1>
     <div class="container">
       <img v-bind:src="play.Image" alt="Image of the show">
       <div class="film-content"><h3> {{ play.Name }} </h3></div>
@@ -32,7 +34,7 @@
 
         <select v-model="date" v-on:change="getTime">
           <option disabled value="">Please select a date</option>
-          <option v-for="(item, index) in dates" :key="index"> {{ item }} </option>
+          <option v-for="(item, index) in dates" :key="index"> {{ item.Date }} </option>
         </select>
 
         <label for="dates">Choose a time:</label>
@@ -40,13 +42,13 @@
         <select v-model="time">
           <option disabled value="" v-if="date.length">Please select a time</option>
           <option disabled value="" v-else="date.length">Please select a date first</option>
-          <option v-for="(item, index) in times" :key="index"> {{ item }} </option>
+          <option v-for="(item, index) in times" :key="index"> {{ item.Time }} </option>
         </select>
       </div>
-      <div class="film-button"><button>Find tickets</button></div>
+      <div class="film-button" onclick="vueinst1.showSeats = true;"><button>Find tickets</button></div>
     </div>
 
-    <div id="seats">
+    <div id="seats" v-if="showSeats">
       <div class="section">
         <span>Pick a seating section:</span>
         <div v-for="(item, index) in sections" :key="index">
@@ -60,7 +62,7 @@
       <ul class="seatbox">
         <li>
           <div class="seat"></div>
-          <small>N/A</small>
+          <small>Available</small>
         </li>
         <li>
           <div class="seat selected"></div>

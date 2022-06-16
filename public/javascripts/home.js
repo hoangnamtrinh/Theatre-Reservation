@@ -32,22 +32,24 @@
 //   },
 // });
 
-function getPlay(id) {
-    console.log(id);
-    window.location.href = ('/users/play/' + String(id));
-}
+// function getPlay(id) {
+//     console.log(id);
+//     window.location.href = ('/users/play/' + String(id));
+// }
 
 var vueinst1 = new Vue({
   el: '#main',
   data: {
-    show_reservation: false,
+    show_reservation: true,
     link: "",
+    play_id: 0,
     plays: [],
     play: [],
     date: "",
     time: "",
     dates: [],
     times: [],
+    showSeats: false,
     checkedSections: [],
     filterSections: [true, true, true, true, true],
     sections: ['A', 'B', 'C', 'D', 'E'],
@@ -73,21 +75,25 @@ var vueinst1 = new Vue({
       var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-          vueinst1.dates = JSON.parse(this.responseText);
+          vueinst1.play = JSON.parse(this.responseText)[0];
+          // console.log(vueinst1.play[0].Image);
       }
       };
-      xhttp.open("GET", "users/getdate", true);
-      xhttp.send();
+      xhttp.open("POST", "users/getplay", true);
+      xhttp.setRequestHeader("Content-type", "application/json");
+      xhttp.send(JSON.stringify({ play_id: vueinst1.play_id }));
   },
     getDate: function(events) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             vueinst1.dates = JSON.parse(this.responseText);
+            // console.log(vueinst1.dates)
         }
         };
-        xhttp.open("GET", "users/getdate", true);
-        xhttp.send();
+        xhttp.open("POST", "users/getdate", true);
+        xhttp.setRequestHeader("Content-type", "application/json");
+        xhttp.send(JSON.stringify({ play_id: vueinst1.play_id }));
     },
     getTime: function(events) {
       var xhttp = new XMLHttpRequest();
@@ -96,8 +102,9 @@ var vueinst1 = new Vue({
           vueinst1.times = JSON.parse(this.responseText);
       }
       };
-      xhttp.open("GET", "users/gettime", true);
-      xhttp.send();
+      xhttp.open("POST", "users/gettime", true);
+      xhttp.setRequestHeader("Content-type", "application/json");
+      xhttp.send(JSON.stringify({ play_id: vueinst1.play_id, date: vueinst1.date }));
     },
     filter: function(events) {
       var xhttp = new XMLHttpRequest();
