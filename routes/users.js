@@ -36,6 +36,37 @@ router.get('/gettime', function(req, res, next) {
   // res.sendFile('film.html');
 });
 
+var seats = [];
+router.post('/addseats', function(req, res, next) {
+  seats = req.body.bookedSeats;
+  // console.log(seats);
+  res.send(req.body);
+});
+
+var sections = [];
+router.post('/filter', function(req, res, next) {
+  sections = req.body.sections;
+  filters = [false, false, false, false, false];
+  for (const s of sections) {
+    if (s == 'A') {
+      filters[0] = true;
+    }
+    if (s == 'B') {
+      filters[1] = true;
+    }
+    if (s == 'C') {
+      filters[2] = true;
+    }
+    if (s == 'D') {
+      filters[3] = true;
+    }
+    if (s == 'E') {
+      filters[4] = true;
+    }
+  }
+  res.send(filters);
+});
+
 // router.get('/getactors', function(req, res, next) {
 //   //Connect to the database
 //   req.pool.getConnection( function(err,connection) {

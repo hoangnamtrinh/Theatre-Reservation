@@ -32,15 +32,15 @@
     </div>
 
     <div id="seats">
-      <div class="movie-container">
-        <label>Pick a movie:</label>
-        <select id="movie">
-          <option value="10">Avengers: Endgame ($10)</option>
-          <option value="12">Joker ($12)</option>
-          <option value="8">Toy Story 4 ($8)</option>
-          <option value="9">The Lion King ($9)</option>
-        </select>
+      <div class="section">
+        <span>Pick a seating section:</span>
+        <div v-for="(item, index) in sections" :key="index">
+          <input type="checkbox" v-bind:value="item" v-model="checkedSections">
+          <label for="item"> {{item}} </label>
+        </div>
       </div>
+      <!-- <span> {{ checkedSections }} </span> -->
+      <button v-on:click="filter" onclick="resetBookedSeats()">Filter</button>
   
       <ul class="seatbox">
         <li>
@@ -60,67 +60,23 @@
       <div class="container">
         <div class="screen"></div>
   
-        <div class="row">
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
+        <div class="row" id="A" v-if="filterSections[0] == true">
+          <div class="seat" v-for="(item, index) in 10" :key="index" v-bind:id="item" style="color: whitesmoke;" onclick="bookSeat(this.id)"> {{item}} </div>
         </div>
-        <div class="row">
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat occupied"></div>
-          <div class="seat occupied"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
+        <div class="row" id="B" v-if="filterSections[1] == true">
+          <div class="seat" v-for="(item, index) in 10" :key="index" v-bind:id="item + 10" style="color: whitesmoke;" onclick="bookSeat(this.id)"> {{item + 10}} </div>
         </div>
-        <div class="row">
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat occupied"></div>
-          <div class="seat occupied"></div>
+        <div class="row" id="C" v-if="filterSections[2] == true">
+          <div class="seat" v-for="(item, index) in 10" :key="index" v-bind:id="item + 20" style="color: whitesmoke;" onclick="bookSeat(this.id)"> {{item + 20}} </div>
         </div>
-        <div class="row">
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
+        <div class="row" id="D" v-if="filterSections[3] == true">
+          <div class="seat" v-for="(item, index) in 10" :key="index" v-bind:id="item + 30" style="color: whitesmoke;" onclick="bookSeat(this.id)"> {{item + 30}} </div>
         </div>
-        <div class="row">
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat occupied"></div>
-          <div class="seat occupied"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-        </div>
-        <div class="row">
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat occupied"></div>
-          <div class="seat occupied"></div>
-          <div class="seat occupied"></div>
-          <div class="seat"></div>
+        <div class="row" id="E" v-if="filterSections[4] == true">
+          <div class="seat" v-for="(item, index) in 10" :key="index" v-bind:id="item + 40" style="color: whitesmoke;" onclick="bookSeat(this.id)"> {{item + 40}} </div>
         </div>
       </div>
+      <button onclick="addSeats()">Confirm</button>
     </div>
   </div>
 </body>
