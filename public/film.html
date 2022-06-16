@@ -1,0 +1,128 @@
+<html>
+
+<head>
+  <title>Home</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+  <script src="/javascripts/film.js" defer></script>
+</head>
+
+<body>
+  <div id="main">
+    <div class="container">
+      <img src="https://d35kvm5iuwjt9t.cloudfront.net/dbimages/sfx267153.jpg" alt="Image of the show">
+      <div class="film-content"><h3>The Shànghǎi MiMi Band</h3><p></p><p>Fri 17 Jun - Sat 18 Jun 2022</p><p>Adelaide Festival Centre, Adelaide SA</p></div>
+      <div class="drop-down">
+        <label for="dates">Choose a date:</label>
+
+        <select v-model="date" v-on:change="getTime">
+          <option disabled value="">Please select a date</option>
+          <option v-for="(item, index) in dates" :key="index"> {{ item }} </option>
+        </select>
+
+        <label for="dates">Choose a time:</label>
+
+        <select v-model="time">
+          <option disabled value="" v-if="date.length">Please select a time</option>
+          <option disabled value="" v-else="date.length">Please select a date first</option>
+          <option v-for="(item, index) in times" :key="index"> {{ item }} </option>
+        </select>
+      </div>
+      <div class="film-button"><button>Find tickets</button></div>
+    </div>
+
+    <div id="seats">
+      <div class="movie-container">
+        <label>Pick a movie:</label>
+        <select id="movie">
+          <option value="10">Avengers: Endgame ($10)</option>
+          <option value="12">Joker ($12)</option>
+          <option value="8">Toy Story 4 ($8)</option>
+          <option value="9">The Lion King ($9)</option>
+        </select>
+      </div>
+  
+      <ul class="seatbox">
+        <li>
+          <div class="seat"></div>
+          <small>N/A</small>
+        </li>
+        <li>
+          <div class="seat selected"></div>
+          <small>Selected</small>
+        </li>
+        <li>
+          <div class="seat occupied"></div>
+          <small>Occupied</small>
+        </li>
+      </ul>
+  
+      <div class="container">
+        <div class="screen"></div>
+  
+        <div class="row">
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+        </div>
+        <div class="row">
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat occupied"></div>
+          <div class="seat occupied"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+        </div>
+        <div class="row">
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat occupied"></div>
+          <div class="seat occupied"></div>
+        </div>
+        <div class="row">
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+        </div>
+        <div class="row">
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat occupied"></div>
+          <div class="seat occupied"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+        </div>
+        <div class="row">
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat occupied"></div>
+          <div class="seat occupied"></div>
+          <div class="seat occupied"></div>
+          <div class="seat"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

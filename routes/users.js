@@ -3,45 +3,75 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  res.sendFile('home.html');
 });
 
-router.get('/getactors', function(req, res, next) {
-  //Connect to the database
-  req.pool.getConnection( function(err,connection) {
-    if (err) {
-      res.sendStatus(500);
-      return;
-    }
-    var query = "SELECT * FROM actor";
-    connection.query(query, function(err, rows, fields) {
-      connection.release(); // release connection
-      if (err) {
-        res.sendStatus(500);
-        return;
-      }
-      res.json(rows); //send response
-    });
-  });
+const plays = [{ID: 1, Image: "https://www.target.com.au/medias/static_content/product/images/full/59/54/A1115954.jpg?impolicy=product_portrait_hero", Name: "HP"}, 
+{ID: 2, Image: "https://m.media-amazon.com/images/I/51dHnZJcZ2L._AC_SY580_.jpg", Name: "BB"}];
+router.get('/getplays', function(req, res, next) {
+  res.json(plays);
 });
 
-router.post('/addactor', function(req, res, next) {
-  //Connect to the database
-  req.pool.getConnection( function(err,connection) {
-    if (err) {
-      res.sendStatus(500);
-      return;
-    }
-    var query = "INSERT INTO actor (first_name, last_name) VALUES (?, ?)";
-    connection.query(query, [req.body.first_name, req.body.last_name], function(err, rows, fields) {
-      connection.release(); // release connection
-      if (err) {
-        res.sendStatus(500);
-        return;
-      }
-      res.sendStatus(200); //send response
-    });
-  });
+router.get('/getplay/:id', function(req, res, next) {
+  res.json(plays[req.params.id]);
 });
+
+router.get('/play/:id', function(req, res, next) {
+  // var film_id = res.params.id;
+  res.send("all");
+  // res.sendFile('film.html');
+});
+
+var dates = ['a', 'b'];
+router.get('/getdate', function(req, res, next) {
+  // var film_id = res.params.id;
+  res.json(dates);
+  // res.sendFile('film.html');
+});
+
+var times = ['a', 'b'];
+router.get('/gettime', function(req, res, next) {
+  // var film_id = res.params.id;
+  res.json(times);
+  // res.sendFile('film.html');
+});
+
+// router.get('/getactors', function(req, res, next) {
+//   //Connect to the database
+//   req.pool.getConnection( function(err,connection) {
+//     if (err) {
+//       res.sendStatus(500);
+//       return;
+//     }
+//     var query = "SELECT * FROM actor";
+//     connection.query(query, function(err, rows, fields) {
+//       connection.release(); // release connection
+//       if (err) {
+//         res.sendStatus(500);
+//         return;
+//       }
+//       res.json(rows); //send response
+//     });
+//   });
+// });
+
+// router.post('/addactor', function(req, res, next) {
+//   //Connect to the database
+//   req.pool.getConnection( function(err,connection) {
+//     if (err) {
+//       res.sendStatus(500);
+//       return;
+//     }
+//     var query = "INSERT INTO actor (first_name, last_name) VALUES (?, ?)";
+//     connection.query(query, [req.body.first_name, req.body.last_name], function(err, rows, fields) {
+//       connection.release(); // release connection
+//       if (err) {
+//         res.sendStatus(500);
+//         return;
+//       }
+//       res.sendStatus(200); //send response
+//     });
+//   });
+// });
 
 module.exports = router;
