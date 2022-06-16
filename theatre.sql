@@ -8,7 +8,6 @@ CREATE TABLE Customer (
     Password BINARY(32) NOT NULL,
 
     PRIMARY KEY (ID),
-    CONSTRAINT username_email_not_unique UNIQUE (Username, Email)
 );
 
 CREATE TABLE Section (
