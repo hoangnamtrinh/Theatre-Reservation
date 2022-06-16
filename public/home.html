@@ -7,21 +7,95 @@
 </head>
 
 <body>
-
+  <h1>Lists</h1>
+  <div id="main">
   <div id="app">
 
-  
+
     <div id="shows">
       <div class="show" v-for="(play, index) in plays" :key="index">
         <img v-bind:src="play.Image" alt="Image of the show">
         <div class="show-content"><h3> {{ play.Name }} </h3>
           <p></p><p>Fri 17 Jun - Sat 18 Jun 2022</p><p>Adelaide Festival Centre, Adelaide SA</p>
         </div>
-        <div class="show-button"><button v-bind:id="play.ID" onclick="getPlay(this.id)">Reserve</button></div>
+        <div class="show-button"><button v-bind:id="play.ID" v-on:click="show_reservation = true" onclick="getPlay(this.id)">Reserve</button></div>
       </div>
     </div>
   </div>
 
+  <div id="main" v-if="show_reservation">
+    <div class="container">
+      <img v-bind:src="play.Image" alt="Image of the show">
+      <div class="film-content"><h3> {{ play.Name }} </h3></div>
+      <div class="drop-down">
+        <label for="dates">Choose a date:</label>
+
+        <select v-model="date" v-on:change="getTime">
+          <option disabled value="">Please select a date</option>
+          <option v-for="(item, index) in dates" :key="index"> {{ item }} </option>
+        </select>
+
+        <label for="dates">Choose a time:</label>
+
+        <select v-model="time">
+          <option disabled value="" v-if="date.length">Please select a time</option>
+          <option disabled value="" v-else="date.length">Please select a date first</option>
+          <option v-for="(item, index) in times" :key="index"> {{ item }} </option>
+        </select>
+      </div>
+      <div class="film-button"><button>Find tickets</button></div>
+    </div>
+
+    <div id="seats">
+      <div class="section">
+        <span>Pick a seating section:</span>
+        <div v-for="(item, index) in sections" :key="index">
+          <input type="checkbox" v-bind:value="item" v-model="checkedSections">
+          <label for="item"> {{item}} </label>
+        </div>
+      </div>
+      <!-- <span> {{ checkedSections }} </span> -->
+      <button v-on:click="filter" onclick="resetBookedSeats()">Filter</button>
+
+      <ul class="seatbox">
+        <li>
+          <div class="seat"></div>
+          <small>N/A</small>
+        </li>
+        <li>
+          <div class="seat selected"></div>
+          <small>Selected</small>
+        </li>
+        <li>
+          <div class="seat occupied"></div>
+          <small>Occupied</small>
+        </li>
+      </ul>
+
+      <div class="container">
+        <div class="screen"></div>
+
+        <div class="row" id="A" v-if="filterSections[0] == true"><span>A</span>
+          <div class="seat" v-for="(item, index) in 10" :key="index" v-bind:id="item" style="color: whitesmoke;" onclick="bookSeat(this.id)"> {{item}} </div>
+        </div>
+        <div class="row" id="B" v-if="filterSections[1] == true"><span>B</span>
+          <div class="seat" v-for="(item, index) in 10" :key="index" v-bind:id="item + 10" style="color: whitesmoke;" onclick="bookSeat(this.id)"> {{item + 10}} </div>
+        </div>
+        <div class="row" id="C" v-if="filterSections[2] == true"><span>C</span>
+          <div class="seat" v-for="(item, index) in 10" :key="index" v-bind:id="item + 20" style="color: whitesmoke;" onclick="bookSeat(this.id)"> {{item + 20}} </div>
+        </div>
+        <div class="row" id="D" v-if="filterSections[3] == true"><span>D</span>
+          <div class="seat" v-for="(item, index) in 10" :key="index" v-bind:id="item + 30" style="color: whitesmoke;" onclick="bookSeat(this.id)"> {{item + 30}} </div>
+        </div>
+        <div class="row" id="E" v-if="filterSections[4] == true"><span>E</span>
+          <div class="seat" v-for="(item, index) in 10" :key="index" v-bind:id="item + 40" style="color: whitesmoke;" onclick="bookSeat(this.id)"> {{item + 40}} </div>
+        </div>
+      </div>
+      <button onclick="addSeats()">Confirm</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
- 
+

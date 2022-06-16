@@ -26,16 +26,26 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use(session({                   
-  secret: 'Nam',  
-  resave: false,     
-  saveUninitialized: true,            
-  cookie: { secure: false }          
+app.use(session({
+  secret: 'Nam',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
 }));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+// app.use(function(req, res, next) {
+//   if (req.session.user) {
+//     next();
+//   } else {
+//     res.redirect('/login.html');
+//   }
+// });
 app.use('/users', usersRouter);
-
+// error request
+app.use(function(req, res, next) {
+  res.send("No url matched");
+});
 module.exports = app;

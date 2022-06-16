@@ -1,6 +1,7 @@
 var vueinst = new Vue({
   el: '#main',
   data: {
+    play: [],
     date: "",
     time: "",
     dates: [],
@@ -14,6 +15,16 @@ var vueinst = new Vue({
     this.getDate()
   },
   methods: {
+    getPlay: function(events) {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          vueinst.dates = JSON.parse(this.responseText);
+      }
+      };
+      xhttp.open("GET", "users/getdate", true);
+      xhttp.send();
+  },
     getDate: function(events) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
@@ -46,7 +57,7 @@ var vueinst = new Vue({
       xhttp.send(JSON.stringify({ sections: vueinst.checkedSections }));
     },
   },
-}); 
+});
 
 var bookedSeats = [];
 function resetBookedSeats() {
@@ -72,7 +83,7 @@ function bookSeat(seat_id) {
       seat.className = "seat";
     }
     console.log(bookedSeats);
-  } 
+  }
 }
 
 function addSeats() {
@@ -85,7 +96,7 @@ function addSeats() {
     xhttp.open("POST", "users/addseats", true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(JSON.stringify({ bookedSeats: bookedSeats }));
-    
+
   } else {
     alert("Please choose a seat");
   }

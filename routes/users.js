@@ -6,27 +6,57 @@ router.get('/', function(req, res, next) {
   res.sendFile('home.html');
 });
 
-const plays = [{ID: 1, Image: "https://www.target.com.au/medias/static_content/product/images/full/59/54/A1115954.jpg?impolicy=product_portrait_hero", Name: "HP"},
-{ID: 2, Image: "https://m.media-amazon.com/images/I/51dHnZJcZ2L._AC_SY580_.jpg", Name: "BB"}];
 router.get('/getplays', function(req, res, next) {
-  res.json(plays);
+  //Connect to the database
+  req.pool.getConnection( function(err,connection) {
+    if (err) {
+      res.sendStatus(500);
+      return;
+    }
+    var query = "SELECT * FROM Play";
+    connection.query(query, function(err, rows, fields) {
+      connection.release(); // release connection
+      if (err) {
+        res.sendStatus(500);
+        return;
+      }
+      res.json(rows); //send response
+    });
+  });
+  // res.json(plays);
 });
 
-router.get('/getplay/:id', function(req, res, next) {
-  res.json(plays[req.params.id]);
+router.get('/getplay', function(req, res, next) {
+    //Connect to the database
+    req.pool.getConnection( function(err,connection) {
+      if (err) {
+        res.sendStatus(500);
+        return;
+      }
+      var query = "SELECT * FROM Play WHERE ID = ?";
+      connection.query(query, [req.session.play_id], function(err, rows, fields) {
+        connection.release(); // release connection
+        if (err) {
+          res.sendStatus(500);
+          return;
+        }
+        res.json(rows); //send response
+      });
+    });
+    // res.json(plays);
 });
 
 router.get('/play/:id', function(req, res, next) {
-  // var film_id = res.params.id;
-  res.send("all");
-  // res.sendFile('film.html');
+  req.session.play_id = req.params.id;
+  // res.redirect('/play.html');
+  res.send();
 });
 
 var dates = ['a', 'b'];
 router.get('/getdate', function(req, res, next) {
   // var film_id = res.params.id;
   res.json(dates);
-  // res.sendFile('film.html');
+  // res.sendFile('/film.html');
 });
 
 var times = ['a', 'b'];

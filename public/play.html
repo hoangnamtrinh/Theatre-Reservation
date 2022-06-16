@@ -10,8 +10,8 @@
 <body>
   <div id="main">
     <div class="container">
-      <img src="https://d35kvm5iuwjt9t.cloudfront.net/dbimages/sfx267153.jpg" alt="Image of the show">
-      <div class="film-content"><h3>The Shànghǎi MiMi Band</h3><p></p><p>Fri 17 Jun - Sat 18 Jun 2022</p><p>Adelaide Festival Centre, Adelaide SA</p></div>
+      <img v-bind:src="play.Image" alt="Image of the show">
+      <div class="film-content"><h3> {{ play.Name }} </h3></div>
       <div class="drop-down">
         <label for="dates">Choose a date:</label>
 
@@ -41,7 +41,7 @@
       </div>
       <!-- <span> {{ checkedSections }} </span> -->
       <button v-on:click="filter" onclick="resetBookedSeats()">Filter</button>
-  
+
       <ul class="seatbox">
         <li>
           <div class="seat"></div>
@@ -56,10 +56,10 @@
           <small>Occupied</small>
         </li>
       </ul>
-  
+
       <div class="container">
         <div class="screen"></div>
-  
+
         <div class="row" id="A" v-if="filterSections[0] == true"><span>A</span>
           <div class="seat" v-for="(item, index) in 10" :key="index" v-bind:id="item" style="color: whitesmoke;" onclick="bookSeat(this.id)"> {{item}} </div>
         </div>
