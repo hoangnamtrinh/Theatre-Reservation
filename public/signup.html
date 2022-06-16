@@ -2,14 +2,12 @@
 <html lang="en">
   <head>
     <title>Home</title>
-    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <script src="./javascripts/login-signup.js" defer></script>
   </head>
   <body>
-    <form action="/signup" method="post" class="authCard">
+    <form action="/signup" method="POST" class="authCard">
       <h1 class="authTitle">SIGN UP</h1>
-      <!-- <div>
-          <input type="text" name="fullName" required placeholder="Your fullname" class="authInput">
-      </div> -->
       <div>
           <input type="text" id="username" required placeholder="Username" class="authInput">
       </div>
@@ -19,7 +17,8 @@
       <div>
           <input type="password" id="confirmPassword" required placeholder="Confirm Password" class="authInput">
       </div>
-      <a href="./login.html">Already have an account</a>
+      <a href="./login.html" style="color:white">Already have an account</a>
+      <h4 class="alert" id="notice" hidden>Testing</h4>
       <div class="authBtn">
         <button type='submit' onclick="signup();">Sign up</button>
       </div>

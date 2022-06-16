@@ -26,7 +26,7 @@ router.post('/login', function(req, res, next) {
           return;
         }
 
-        if (rows[0].length > 0) {
+        if (rows.length > 0) {
           req.session.user = rows[0];
           res.json(rows[0]); //send response
         } else {
@@ -42,30 +42,22 @@ router.get('/signup', function(req, res, next) {
 });
 
 router.post('/signup', function(req, res, next) {
-  if ('username' in req.body && 'email' in req.body && 'password' in req.body) {
+  if ('username' in req.body && 'password' in req.body) {
     // Connect to the database
     req.pool.getConnection(function(err, connection) {
       if (err) {
         res.sendStatus(500);
         return;
       }
-      var query = "CALL sign_up(?, ?, ?)";
-      connection.query(query, [req.body.username, req.body.email, req.body.password], function(err, rows, fields) {
+      var query = "INSERT INTO Customer (Username, Password) VALUES (?, UNHEX(SHA2(CONCAT('SA', ?, 'LT'), 256)));";
+      connection.query(query, [req.body.username, req.body.password], function(err, rows, fields) {
         connection.release(); // release connection
         if (err) {
           console.log(err);
-          res.sendStatus(500);
+          res.sendStatus(500).send(err);
           return;
         }
-        if (rows[0].length > 0) {
-          req.session.user = rows[0];
-          console.log('login success');
-          console.log(req.session.user);
-          res.json(rows[0]); //send response
-        } else {
-          console.log('login bad');
-          res.sendStatus(401);
-        }
+        res.sendStatus(200);
       });
     });
   }

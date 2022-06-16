@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
   res.sendFile('home.html');
 });
 
-const plays = [{ID: 1, Image: "https://www.target.com.au/medias/static_content/product/images/full/59/54/A1115954.jpg?impolicy=product_portrait_hero", Name: "HP"}, 
+const plays = [{ID: 1, Image: "https://www.target.com.au/medias/static_content/product/images/full/59/54/A1115954.jpg?impolicy=product_portrait_hero", Name: "HP"},
 {ID: 2, Image: "https://m.media-amazon.com/images/I/51dHnZJcZ2L._AC_SY580_.jpg", Name: "BB"}];
 router.get('/getplays', function(req, res, next) {
   res.json(plays);
@@ -67,24 +67,24 @@ router.post('/filter', function(req, res, next) {
   res.send(filters);
 });
 
-// router.get('/getactors', function(req, res, next) {
-//   //Connect to the database
-//   req.pool.getConnection( function(err,connection) {
-//     if (err) {
-//       res.sendStatus(500);
-//       return;
-//     }
-//     var query = "SELECT * FROM actor";
-//     connection.query(query, function(err, rows, fields) {
-//       connection.release(); // release connection
-//       if (err) {
-//         res.sendStatus(500);
-//         return;
-//       }
-//       res.json(rows); //send response
-//     });
-//   });
-// });
+router.get('/getCustomer', function(req, res, next) {
+  //Connect to the database
+  req.pool.getConnection( function(err,connection) {
+    if (err) {
+      res.sendStatus(500);
+      return;
+    }
+    var query = "SELECT * FROM Customer";
+    connection.query(query, function(err, rows, fields) {
+      connection.release(); // release connection
+      if (err) {
+        res.sendStatus(500);
+        return;
+      }
+      res.json(rows); //send response
+    });
+  });
+});
 
 // router.post('/addactor', function(req, res, next) {
 //   //Connect to the database
