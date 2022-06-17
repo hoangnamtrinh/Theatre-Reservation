@@ -203,6 +203,8 @@ function addSeats() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
+      alert("Reserved!");
+      window.location.href = '/users/history';
     }
     };
     xhttp.open("POST", "users/addseats", true);
