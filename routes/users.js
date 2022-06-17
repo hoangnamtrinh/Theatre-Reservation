@@ -107,7 +107,7 @@ router.post('/addseats', function(req, res, next) {
           return;
         }
         var query = "INSERT INTO Reservation (Customer_ID, Seat_ID, Showtime_ID) VALUES (?, ?, ?);";
-        connection.query(query, [req.body.username, req.body.password], function(err, rows, fields) {
+        connection.query(query, [req.body.userID, s, ], function(err, rows, fields) {
           connection.release(); // release connection
           if (err) {
             console.log(err);
