@@ -136,23 +136,23 @@ var vueinst1 = new Vue({
       xhttp.setRequestHeader("Content-type", "application/json");
       xhttp.send(JSON.stringify({ play_id: vueinst1.play_id, date: vueinst1.date, time: vueinst1.time }));
     },
-    addSeats: function(events) {
-      if (bookedSeats.length > 0) {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-              // res.send()
-            }
-        }
-        };
-        xhttp.open("POST", "users/addseats", true);
-        xhttp.setRequestHeader("Content-type", "application/json");
-        xhttp.send(JSON.stringify({ play_id: vueinst1.play_id, date: vueinst1.date, time: vueinst1.time, bookedSeats: bookedSeats }));
-      } else {
-        alert
-      }
+    // addSeats: function(events) {
+    //   if (bookedSeats.length > 0) {
+    //     var xhttp = new XMLHttpRequest();
+    //     xhttp.onreadystatechange = function() {
+    //     if (this.readyState == 4 && this.status == 200) {
+    //           // res.send()
+    //         }
+    //     }
+    //     };
+    //     xhttp.open("POST", "users/addseats", true);
+    //     xhttp.setRequestHeader("Content-type", "application/json");
+    //     xhttp.send(JSON.stringify({ play_id: vueinst1.play_id, date: vueinst1.date, time: vueinst1.time, bookedSeats: bookedSeats }));
+    //   } else {
+    //     alert
+    //   }
 
-    },
+    // },
     filter: function(events) {
       var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
@@ -196,6 +196,9 @@ function bookSeat(seat_id) {
 
 function addSeats() {
   if (bookedSeats.length > 0) {
+    let date = document.getElementById("adddate").innerText;
+    let time = document.getElementById("addtime").innerText;
+    let play_id = document.getElementById("addplayid").innerText;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -203,7 +206,7 @@ function addSeats() {
     };
     xhttp.open("POST", "users/addseats", true);
     xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send(JSON.stringify({ bookedSeats: bookedSeats }));
+    xhttp.send(JSON.stringify({play_id: play_id, date: date, time: time, bookedSeats: bookedSeats}));
 
   } else {
     alert("Please choose a seat");
