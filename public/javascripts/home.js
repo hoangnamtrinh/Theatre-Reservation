@@ -130,9 +130,8 @@ var vueinst1 = new Vue({
             let seat_id = vueinst1.oseats[i].Seat_ID;
             let oseat = document.getElementById(seat_id);
             oseat.className += " occupied";
-
-            vueinst1.showtime_id = String(vueinst1.oseats[i].showtime_id);
           }
+          vueinst1.showtime_id = String(vueinst1.oseats[0].Showtime_ID);
       }
       };
       xhttp.open("POST", "users/getoccupiedseats", true);
