@@ -194,6 +194,7 @@ router.get('/history', function(req, res, next) {
 });
 
 router.get('/getreservations', function(req, res, next) {
+  
   //Connect to the database
   if ('user' in req.session) {
     var user_id = req.session.user[0].ID;
