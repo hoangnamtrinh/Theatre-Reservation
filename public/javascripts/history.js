@@ -11,7 +11,7 @@ var vueinst = new Vue({
       var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-          vueinst.dates = JSON.parse(this.responseText);
+          vueinst.reservations = JSON.parse(this.responseText);
       }
       };
       xhttp.open("GET", "users/getreservations", true);
