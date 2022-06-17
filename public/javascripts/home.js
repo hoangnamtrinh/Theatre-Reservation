@@ -208,7 +208,7 @@ function addSeats() {
     };
     xhttp.open("POST", "users/addseats", true);
     xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send(JSON.stringify({play_id: play_id, showtime_id: showtime_id, bookedSeats: bookedSeats}));
+    xhttp.send(JSON.stringify({showtime_id: showtime_id, bookedSeats: bookedSeats}));
 
   } else {
     alert("Please choose a seat");
