@@ -202,12 +202,10 @@ router.get('/history', function(req, res, next) {
 router.get('/getreservations', function(req, res, next) {
   console.log(user);
   //Connect to the database
-  if (user) {
-    let user_id = user.ID;
-    console.log(user_id);
-  } else {
+  if (!user) {
     res.sendStatus(401);
   }
+
   req.pool.getConnection( function(err,connection) {
     if (err) {
       console.log(err);
@@ -215,7 +213,7 @@ router.get('/getreservations', function(req, res, next) {
       return;
     }
     var query = "SELECT * FROM Reservation INNER JOIN Showtime ON Reservation.Showtime_ID = Showtime.ID INNER JOIN Customer ON Reservation.Customer_ID = Customer.ID INNER JOIN Play ON Play_ID = Play.ID WHERE Customer_ID = ?";
-    connection.query(query, [user_id], function(err, rows, fields) {
+    connection.query(query, [user.ID], function(err, rows, fields) {
       connection.release(); // release connection
       if (err) {
         console.log(err);
