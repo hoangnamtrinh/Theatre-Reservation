@@ -171,7 +171,7 @@ router.post('/getoccupiedseats', function(req, res, next) {
       res.sendStatus(500);
       return;
     }
-    var query = "SELECT Seat_ID FROM Reservation INNER JOIN Showtime ON Reservation.Showtime_ID = Showtime.ID WHERE Date = ? AND Time = ? AND Play_ID = ?";
+    var query = "SELECT * FROM Reservation INNER JOIN Showtime ON Reservation.Showtime_ID = Showtime.ID WHERE Date = ? AND Time = ? AND Play_ID = ?";
     connection.query(query, [req.body.date, req.body.time, req.body.play_id,], function(err, rows, fields) {
       connection.release(); // release connection
       if (err) {
