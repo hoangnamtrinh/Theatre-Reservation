@@ -198,19 +198,19 @@ function bookSeat(seat_id) {
 
 function addSeats() {
   if (bookedSeats.length > 0) {
-    let showtime_id = document.getElementById("addshowtime").innerText;
+    let showtime_id = parseInt(document.getElementById("addshowtime").innerText);
     console.log(document.getElementById("addshowtime"));
-  //   var xhttp = new XMLHttpRequest();
-  //   xhttp.onreadystatechange = function() {
-  //   if (this.readyState == 4 && this.status == 200) {
-  //   }
-  //   };
-  //   xhttp.open("POST", "users/addseats", true);
-  //   xhttp.setRequestHeader("Content-type", "application/json");
-  //   xhttp.send(JSON.stringify({showtime_id: showtime_id, bookedSeats: bookedSeats}));
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+    }
+    };
+    xhttp.open("POST", "users/addseats", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(JSON.stringify({showtime_id: showtime_id, bookedSeats: bookedSeats}));
 
-  // } else {
-  //   alert("Please choose a seat");
+  } else {
+    alert("Please choose a seat");
   }
 }
 
