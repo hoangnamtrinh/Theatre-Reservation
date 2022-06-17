@@ -212,7 +212,7 @@ function addSeats() {
 
   // } else {
   //   alert("Please choose a seat");
-  // }
+  }
 }
 
 // var oseats = vueinst1.oseats;
