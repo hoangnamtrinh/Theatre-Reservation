@@ -6,6 +6,7 @@ var path = require('path');
 var user;
 router.get('/', function(req, res, next) {
   user = req.session.user[0];
+  console.lg(user);
   res.sendStatus(200);
 });
 
@@ -103,6 +104,7 @@ router.post('/addseats', function(req, res, next) {
   if (user) {
     let user_id = user.ID;
     console.log(user_id);
+  } else {
     res.sendStatus(401);
   }
   if ('showtime_id' in req.body && 'bookedSeats' in req.body) {
@@ -201,6 +203,7 @@ router.get('/getreservations', function(req, res, next) {
   if (user) {
     let user_id = user.ID;
     console.log(user_id);
+  } else {
     res.sendStatus(401);
   }
   req.pool.getConnection( function(err,connection) {
