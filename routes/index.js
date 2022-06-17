@@ -29,7 +29,7 @@ router.post('/login', function(req, res, next) {
 
         if (rows.length > 0) {
           req.session.user = rows[0];
-          console.log(req.session.user);
+          // console.log(req.session.user);
           res.json(rows[0]); //send response
         } else {
           res.sendStatus(401);
