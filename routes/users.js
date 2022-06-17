@@ -6,9 +6,9 @@ var path = require('path');
 var user;
 router.get('/', function(req, res, next) {
   user = req.session.user;
-  console.log(req.session);
-  console.log(user);
-  console.log(user.ID);
+  // console.log(req.session);
+  // console.log(user);
+  // console.log(user.ID);
   res.sendStatus(200);
 });
 
@@ -102,11 +102,7 @@ router.post('/gettime', function(req, res, next) {
 });
 
 router.post('/addseats', function(req, res, next) {
-  // console.log(user);
-  if (user) {
-    let user_id = user.ID;
-    console.log(user_id);
-  } else {
+  if (!user) {
     res.sendStatus(401);
   }
   if ('showtime_id' in req.body && 'bookedSeats' in req.body) {
@@ -119,7 +115,7 @@ router.post('/addseats', function(req, res, next) {
           return;
         }
         var query = "INSERT INTO Reservation (Customer_ID, Seat_ID, Showtime_ID) VALUES (?, ?, ?);";
-        connection.query(query, [user_id, s, req.body.showtime_id], function(err, rows, fields) {
+        connection.query(query, [user.ID, s, req.body.showtime_id], function(err, rows, fields) {
           connection.release(); // release connection
           if (err) {
             console.log(err);
@@ -200,7 +196,7 @@ router.get('/history', function(req, res, next) {
 });
 
 router.get('/getreservations', function(req, res, next) {
-  console.log(user);
+  // console.log(user);
   //Connect to the database
   if (!user) {
     res.sendStatus(401);
