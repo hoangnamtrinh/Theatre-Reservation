@@ -128,8 +128,7 @@ var vueinst1 = new Vue({
           for (let i = 0; i < vueinst1.oseats.length; i++) {
             let seat_id = vueinst1.oseats[i].Seat_ID;
             let oseat = document.getElementById(seat_id);
-            console.log(oseat);
-            // oseat.className = "seat occupied";
+            oseat.className += "occupied";
           }
       }
       };
