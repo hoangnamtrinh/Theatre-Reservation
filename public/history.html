@@ -13,11 +13,10 @@
     <h1>History</h1>
     <div id="shows">
       <div class="show" v-for="(r, index) in reservations" :key="index">
-        <img v-bind:src="play.Image" alt="Image of the show">
+        <img v-bind:src="r.Image" alt="Image of the show">
         <div class="show-content"><h3> {{ r.Name }} </h3>
-          <p></p><p>Fri 17 Jun - Sat 18 Jun 2022</p><p>Adelaide Festival Centre, Adelaide SA</p>
+          <p> {{ r.Date }} {{ r.Time }} </p>
         </div>
-        <div class="show-button"><button v-bind:id="play.ID" v-on:click="getPlay(), getDate()" onclick="vueinst1.play_id = this.id;vueinst1.show_reservation = false">Reserve</button></div>
       </div>
     </div>
   </div>
