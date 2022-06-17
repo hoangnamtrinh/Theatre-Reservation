@@ -6,7 +6,7 @@ var path = require('path');
 var user;
 router.get('/', function(req, res, next) {
   user = req.session.user[0];
-  console.log(user);
+  console.log(req.session.user);
   res.sendStatus(200);
 });
 
