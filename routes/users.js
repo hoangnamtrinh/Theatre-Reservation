@@ -96,9 +96,10 @@ router.post('/gettime', function(req, res, next) {
 });
 
 router.post('/addseats', function(req, res, next) {
-  // console.log(req.body);
+  console.log(req.body);
   // res.send(req.body);
   if ('showtime_id' in req.body && 'bookedSeats' in req.body) {
+    console.log(req.body);
     var bookedSeats = req.body.bookedSeats;
     for (let s of bookedSeats) {
       // Connect to the database
