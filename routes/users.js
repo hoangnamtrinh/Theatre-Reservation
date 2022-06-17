@@ -106,7 +106,7 @@ router.post('/addseats', function(req, res, next) {
           res.sendStatus(500);
           return;
         }
-        var query = "INSERT INTO Customer (Username, Password) VALUES (?, UNHEX(SHA2(CONCAT('SA', ?, 'LT'), 256)));";
+        var query = "INSERT INTO Reservation (Customer_ID, Seat_ID, Showtime_ID) VALUES (?, ?, ?);";
         connection.query(query, [req.body.username, req.body.password], function(err, rows, fields) {
           connection.release(); // release connection
           if (err) {
