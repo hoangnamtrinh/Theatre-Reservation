@@ -45,7 +45,7 @@
           <option v-for="(item, index) in times" :key="index"> {{ item.Time }} </option>
         </select>
       </div>
-      <div class="film-button" onclick="vueinst1.showSeats = true;"><button>Find tickets</button></div>
+      <div class="film-button" onclick="vueinst1.showSeats = true;" v-on:click="changeOSeats"><button>Find tickets</button></div>
     </div>
 
     <div id="seats" v-if="showSeats">

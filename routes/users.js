@@ -145,6 +145,26 @@ router.get('/getCustomer', function(req, res, next) {
   });
 });
 
+router.post('/getoccupiedseats', function(req, res, next) {
+  //Connect to the database
+  req.pool.getConnection( function(err,connection) {
+    if (err) {
+      res.sendStatus(500);
+      return;
+    }
+    var query = "SELECT Seat_ID FROM Reservation INNER JOIN Showtime ON Reservation.Showtime_ID = Showtime.ID WHERE Date = ? AND Time = ? AND Play_ID = ?";
+    connection.query(query, [req.body.date, req.body.time, req.body.play_id,], function(err, rows, fields) {
+      connection.release(); // release connection
+      if (err) {
+        res.sendStatus(500);
+        return;
+      }
+      res.json(rows); //send response
+    });
+  });
+});
+
+
 // router.post('/addactor', function(req, res, next) {
 //   //Connect to the database
 //   req.pool.getConnection( function(err,connection) {

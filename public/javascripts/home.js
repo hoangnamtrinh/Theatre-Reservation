@@ -49,6 +49,7 @@ var vueinst1 = new Vue({
     time: "",
     dates: [],
     times: [],
+    oseats: [],
     showSeats: false,
     checkedSections: [],
     filterSections: [true, true, true, true, true],
@@ -106,6 +107,36 @@ var vueinst1 = new Vue({
       xhttp.setRequestHeader("Content-type", "application/json");
       xhttp.send(JSON.stringify({ play_id: vueinst1.play_id, date: vueinst1.date }));
     },
+    getOccupiedSeats: function(events) {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          vueinst1.oseats = JSON.parse(this.responseText);
+          console.log(vueinst1.oseats);
+      }
+      };
+      xhttp.open("POST", "users/getoccupiedseats", true);
+      xhttp.setRequestHeader("Content-type", "application/json");
+      xhttp.send(JSON.stringify({ play_id: vueinst1.play_id, date: vueinst1.date, time: vueinst1.time }));
+    },
+    changeOSeats: function(events) {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          vueinst1.oseats = JSON.parse(this.responseText);
+          console.log(vueinst1.oseats);
+          for (let i = 0; i < vueinst1.oseats.length; i++) {
+            let seat_id = vueinst1.oseats[i].Seat_ID;
+            let oseat = document.getElementById(seat_id);
+            console.log(oseat);
+            // oseat.className = "seat occupied";
+          }
+      }
+      };
+      xhttp.open("POST", "users/getoccupiedseats", true);
+      xhttp.setRequestHeader("Content-type", "application/json");
+      xhttp.send(JSON.stringify({ play_id: vueinst1.play_id, date: vueinst1.date, time: vueinst1.time }));
+    },
     filter: function(events) {
       var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
@@ -162,3 +193,14 @@ function addSeats() {
     alert("Please choose a seat");
   }
 }
+
+// var oseats = vueinst1.oseats;
+// function changeOSeats() {
+//   console.log(vueinst1.oseats.Seat_ID);
+//   for (let i = 0; i < vueinst1.oseats.length; i++) {
+//     var seat_id = vueinst1.oseats[i].id;
+//     console.log(seat_id)
+//     var oseat = document.getElementById(seat_id);
+//     oseat.className = "seat occupied";
+//   }
+// }
