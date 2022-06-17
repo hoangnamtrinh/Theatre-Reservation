@@ -113,3 +113,21 @@ a {
 .row {
   display: flex;
 }
+
+.home-btn-ctn {
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+}
+
+.home-btn {
+  width: 30%;
+  height: 30vh;
+  background-color: #ee1505;
+  color: white;
+  margin: 8px 50px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 5rem;
+}
