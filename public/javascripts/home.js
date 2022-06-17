@@ -50,7 +50,7 @@ var vueinst1 = new Vue({
     dates: [],
     times: [],
     oseats: [],
-    showtime_id: 0,
+    showtime_id: '',
     showSeats: false,
     checkedSections: [],
     filterSections: [true, true, true, true, true],
@@ -131,7 +131,7 @@ var vueinst1 = new Vue({
             let oseat = document.getElementById(seat_id);
             oseat.className += " occupied";
 
-            vueinst1.showtime_id = vueinst1.oseats[i].showtime_id;
+            vueinst1.showtime_id = String(vueinst1.oseats[i].showtime_id);
           }
       }
       };
