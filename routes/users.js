@@ -206,7 +206,7 @@ router.get('/getreservations', function(req, res, next) {
       return;
     }
     var query = "SELECT * FROM Reservation INNER JOIN Showtime ON Reservation.Showtime_ID = Showtime.ID INNER JOIN Customer ON Reservation.Customer_ID = Customer.ID INNER JOIN Play ON Play_ID = Play.ID WHERE Customer_ID = ?";
-    connection.query(query, [user_id] function(err, rows, fields) {
+    connection.query(query, [user_id], function(err, rows, fields) {
       connection.release(); // release connection
       if (err) {
         res.sendStatus(500);
