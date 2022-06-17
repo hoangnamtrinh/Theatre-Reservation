@@ -95,11 +95,30 @@ router.post('/gettime', function(req, res, next) {
   // res.sendFile('film.html');
 });
 
-var seats = [];
 router.post('/addseats', function(req, res, next) {
-  seats = req.body.bookedSeats;
-  console.log(req.body);
-  res.send(req.body);
+  // console.log(req.body);
+  // res.send(req.body);
+  if ('play_id' in req.body && 'date' in req.body && 'time' in req.body && 'bookedSeats' in req.body) {
+    for (let s of bookedSeats) {
+      // Connect to the database
+      req.pool.getConnection(function(err, connection) {
+        if (err) {
+          res.sendStatus(500);
+          return;
+        }
+        var query = "INSERT INTO Customer (Username, Password) VALUES (?, UNHEX(SHA2(CONCAT('SA', ?, 'LT'), 256)));";
+        connection.query(query, [req.body.username, req.body.password], function(err, rows, fields) {
+          connection.release(); // release connection
+          if (err) {
+            console.log(err);
+            res.sendStatus(500).send(err);
+            return;
+          }
+          res.sendStatus(200);
+        });
+      });
+    }
+  }
 });
 
 var sections = [];
