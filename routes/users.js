@@ -3,8 +3,10 @@ var router = express.Router();
 var path = require('path');
 
 /* GET users listing. */
+var user;
 router.get('/', function(req, res, next) {
-  res.sendFile('home.html');
+  user = req.session.user[0];
+  res.sendStatus(200);
 });
 
 router.get('/getplays', function(req, res, next) {
@@ -98,8 +100,8 @@ router.post('/gettime', function(req, res, next) {
 
 router.post('/addseats', function(req, res, next) {
   // console.log(req.body);
-  if ('user' in req.session) {
-    var user_id = req.session.user[0].ID;
+  if (user) {
+    let user_id = user.ID;
     console.log(user_id);
     res.sendStatus(401);
   }
@@ -196,8 +198,8 @@ router.get('/history', function(req, res, next) {
 router.get('/getreservations', function(req, res, next) {
 
   //Connect to the database
-  if ('user' in req.session) {
-    var user_id = req.session.user[0].ID;
+  if (user) {
+    let user_id = user.ID;
     console.log(user_id);
     res.sendStatus(401);
   }
