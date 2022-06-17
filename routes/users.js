@@ -98,7 +98,7 @@ router.post('/gettime', function(req, res, next) {
 router.post('/addseats', function(req, res, next) {
   // console.log(req.body);
   // res.send(req.body);
-  if ('play_id' in req.body && 'date' in req.body && 'time' in req.body && 'bookedSeats' in req.body) {
+  if ('showtime_id' in req.body && 'bookedSeats' in req.body) {
     for (let s of bookedSeats) {
       // Connect to the database
       req.pool.getConnection(function(err, connection) {
@@ -107,7 +107,7 @@ router.post('/addseats', function(req, res, next) {
           return;
         }
         var query = "INSERT INTO Reservation (Customer_ID, Seat_ID, Showtime_ID) VALUES (?, ?, ?);";
-        connection.query(query, [req.body.userID, s, ], function(err, rows, fields) {
+        connection.query(query, [1, s, req.body.showtime_id], function(err, rows, fields) {
           connection.release(); // release connection
           if (err) {
             console.log(err);
