@@ -7,9 +7,9 @@ router.get('/', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../public', 'login.html'));
 });
 
-router.get('/login', function(req, res, next) {
-  res.sendFile("login.html");
-});
+// router.get('/login', function(req, res, next) {
+//   res.sendFile("login.html");
+// });
 
 router.post('/login', function(req, res, next) {
   if ('username' in req.body && 'password' in req.body) {
