@@ -7,6 +7,7 @@ var user;
 router.get('/', function(req, res, next) {
   user = req.session.user;
   console.log(req.session);
+  console.log(user);
   console.log(user.ID);
   res.sendStatus(200);
 });
@@ -101,7 +102,7 @@ router.post('/gettime', function(req, res, next) {
 });
 
 router.post('/addseats', function(req, res, next) {
-  // console.log(req.body);
+  // console.log(user);
   if (user) {
     let user_id = user.ID;
     console.log(user_id);
@@ -199,7 +200,7 @@ router.get('/history', function(req, res, next) {
 });
 
 router.get('/getreservations', function(req, res, next) {
-
+  console.log(user);
   //Connect to the database
   if (user) {
     let user_id = user.ID;
