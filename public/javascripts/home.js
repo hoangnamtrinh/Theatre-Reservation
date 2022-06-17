@@ -204,7 +204,7 @@ function addSeats() {
     xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       alert("Reserved!");
-      window.location.href = '/users/history';
+      window.location.href = '/history.html';
     }
     };
     xhttp.open("POST", "users/addseats", true);
