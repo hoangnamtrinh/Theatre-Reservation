@@ -5,9 +5,9 @@ var path = require('path');
 /* GET users listing. */
 var user;
 router.get('/', function(req, res, next) {
-  user = req.session.user[0];
+  user = req.session.user;
   console.log(req.session);
-  console.log(req.body);
+  console.log(user.ID);
   res.sendStatus(200);
 });
 
