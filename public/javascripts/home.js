@@ -136,6 +136,18 @@ var vueinst1 = new Vue({
       xhttp.setRequestHeader("Content-type", "application/json");
       xhttp.send(JSON.stringify({ play_id: vueinst1.play_id, date: vueinst1.date, time: vueinst1.time }));
     },
+    addSeats: function(events) {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+            // res.send()
+          }
+      }
+      };
+      xhttp.open("POST", "users/getoccupiedseats", true);
+      xhttp.setRequestHeader("Content-type", "application/json");
+      xhttp.send(JSON.stringify({ play_id: vueinst1.play_id, date: vueinst1.date, time: vueinst1.time, seats: bookedSeats }));
+    },
     filter: function(events) {
       var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
