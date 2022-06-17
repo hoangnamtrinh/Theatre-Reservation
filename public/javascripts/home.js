@@ -200,7 +200,6 @@ function bookSeat(seat_id) {
 function addSeats() {
   if (bookedSeats.length > 0) {
     let showtime_id = document.getElementById("addshowtime").innerText;
-    let play_id = document.getElementById("addplayid").innerText;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
