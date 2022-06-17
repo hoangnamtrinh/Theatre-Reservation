@@ -98,7 +98,7 @@ router.post('/gettime', function(req, res, next) {
 var seats = [];
 router.post('/addseats', function(req, res, next) {
   seats = req.body.bookedSeats;
-  // console.log(seats);
+  console.log(req.body);
   res.send(req.body);
 });
 
