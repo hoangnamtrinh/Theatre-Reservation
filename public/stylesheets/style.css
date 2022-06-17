@@ -131,3 +131,18 @@ a {
   cursor: pointer;
   font-size: 5rem;
 }
+
+.home {
+  color: green;
+  outline: none;
+  border: none;
+  border-radius: 100%;
+  width: 5rem;
+  height: 5rem;
+  font-size: 3rem;
+  position: absolute;
+  background-color: transparent;
+  top: 1rem;
+  left: 1rem;
+  cursor: pointer;
+}
