@@ -7,6 +7,7 @@ var user;
 router.get('/', function(req, res, next) {
   user = req.session.user[0];
   console.log(req.session.user);
+  console.log(req.body.);
   res.sendStatus(200);
 });
 
