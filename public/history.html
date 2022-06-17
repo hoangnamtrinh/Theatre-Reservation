@@ -1,0 +1,32 @@
+<html>
+<head>
+  <title>Home</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+  <script src="/javascripts/home.js" defer></script>
+</head>
+
+<body>
+
+  <div id="main">
+  <div id="app" v-if="show_reservation">
+  <h1>Lists</h1>
+
+
+    <div id="shows">
+      <div class="show" v-for="(play, index) in plays" :key="index">
+        <img v-bind:src="play.Image" alt="Image of the show">
+        <div class="show-content"><h3> {{ play.Name }} </h3>
+          <p></p><p>Fri 17 Jun - Sat 18 Jun 2022</p><p>Adelaide Festival Centre, Adelaide SA</p>
+        </div>
+        <div class="show-button"><button v-bind:id="play.ID" v-on:click="getPlay(), getDate()" onclick="vueinst1.play_id = this.id;vueinst1.show_reservation = false">Reserve</button></div>
+      </div>
+    </div>
+  </div>
+
+
+  </div>
+
+</body>
+</html>
+

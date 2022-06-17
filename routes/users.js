@@ -184,24 +184,8 @@ router.post('/getoccupiedseats', function(req, res, next) {
   });
 });
 
-
-// router.post('/addactor', function(req, res, next) {
-//   //Connect to the database
-//   req.pool.getConnection( function(err,connection) {
-//     if (err) {
-//       res.sendStatus(500);
-//       return;
-//     }
-//     var query = "INSERT INTO actor (first_name, last_name) VALUES (?, ?)";
-//     connection.query(query, [req.body.first_name, req.body.last_name], function(err, rows, fields) {
-//       connection.release(); // release connection
-//       if (err) {
-//         res.sendStatus(500);
-//         return;
-//       }
-//       res.sendStatus(200); //send response
-//     });
-//   });
-// });
+router.get('/history', function(req, res, next) {
+  res.sendFile('history.html');
+});
 
 module.exports = router;
