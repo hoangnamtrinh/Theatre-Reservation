@@ -100,7 +100,8 @@ router.post('/addseats', function(req, res, next) {
   // console.log(req.body);
   if ('user' in req.session) {
     var user_id = req.session.user[0].ID;
-    console.log(user_id)
+    console.log(user_id);
+    res.sendStatus(401);
   }
   if ('showtime_id' in req.body && 'bookedSeats' in req.body) {
     var bookedSeats = req.body.bookedSeats;
@@ -194,13 +195,18 @@ router.get('/history', function(req, res, next) {
 
 router.get('/getreservations', function(req, res, next) {
   //Connect to the database
+  if ('user' in req.session) {
+    var user_id = req.session.user[0].ID;
+    console.log(user_id);
+    res.sendStatus(401);
+  }
   req.pool.getConnection( function(err,connection) {
     if (err) {
       res.sendStatus(500);
       return;
     }
-    var query = "SELECT * FROM Reservation INNER JOIN Showtime ON Reservation.Showtime_ID = Showtime.ID INNER JOIN Customer ON Reservation.Customer_ID = Customer.ID INNER JOIN Play ON Play_ID = Play.ID WHERE Customer_ID = 1";
-    connection.query(query, function(err, rows, fields) {
+    var query = "SELECT * FROM Reservation INNER JOIN Showtime ON Reservation.Showtime_ID = Showtime.ID INNER JOIN Customer ON Reservation.Customer_ID = Customer.ID INNER JOIN Play ON Play_ID = Play.ID WHERE Customer_ID = ?";
+    connection.query(query, [user_id] function(err, rows, fields) {
       connection.release(); // release connection
       if (err) {
         res.sendStatus(500);
