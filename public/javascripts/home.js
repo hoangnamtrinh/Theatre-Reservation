@@ -199,8 +199,7 @@ function bookSeat(seat_id) {
 
 function addSeats() {
   if (bookedSeats.length > 0) {
-    let date = document.getElementById("adddate").innerText;
-    let time = document.getElementById("addtime").innerText;
+    let showtime_id = document.getElementById("addshowtime").innerText;
     let play_id = document.getElementById("addplayid").innerText;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -209,7 +208,7 @@ function addSeats() {
     };
     xhttp.open("POST", "users/addseats", true);
     xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send(JSON.stringify({play_id: play_id, date: date, time: time, bookedSeats: bookedSeats}));
+    xhttp.send(JSON.stringify({play_id: play_id, showtime_id: showtime_id, bookedSeats: bookedSeats}));
 
   } else {
     alert("Please choose a seat");

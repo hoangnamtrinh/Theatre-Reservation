@@ -93,8 +93,7 @@
           <div class="seat" v-for="(item, index) in 10" :key="index" v-bind:id="item + 40" style="color: whitesmoke;" onclick="bookSeat(this.id)"> {{item + 40}} </div>
         </div>
       </div>
-      <div id="adddate" hidden> {{ date }} </div>
-      <div id="addtime" hidden> {{ time }} </div>
+      <div id="addshowtime" hidden> {{ showtime_id }} </div>
       <div id="addplayid" hidden> {{ play_id }} </div>
 
       <button onclick="addSeats()">Confirm</button>
