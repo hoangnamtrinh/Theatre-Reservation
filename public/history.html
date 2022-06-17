@@ -15,7 +15,8 @@
       <div class="show" v-for="(r, index) in reservations" :key="index">
         <img v-bind:src="r.Image" alt="Image of the show">
         <div class="show-content"><h3> {{ r.Name }} </h3>
-          <p> {{ r.Date }} {{ r.Time }} </p>
+          <p>Time: {{ r.Date }} {{ r.Time }} </p>
+          <p>Seat: {{ r.Date }} {{ r.Time }} </p>
         </div>
       </div>
     </div>
