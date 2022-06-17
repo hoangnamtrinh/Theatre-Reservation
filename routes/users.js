@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var path = require('path');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -185,7 +186,7 @@ router.post('/getoccupiedseats', function(req, res, next) {
 });
 
 router.get('/history', function(req, res, next) {
-  res.sendFile('history.html');
+  res.sendFile(path.join(__dirname, '../public', 'history.html'));
 });
 
 router.get('/getreservations', function(req, res, next) {
