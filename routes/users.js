@@ -194,7 +194,7 @@ router.get('/history', function(req, res, next) {
 });
 
 router.get('/getreservations', function(req, res, next) {
-  
+
   //Connect to the database
   if ('user' in req.session) {
     var user_id = req.session.user[0].ID;
@@ -203,6 +203,7 @@ router.get('/getreservations', function(req, res, next) {
   }
   req.pool.getConnection( function(err,connection) {
     if (err) {
+      console.log(err);
       res.sendStatus(500);
       return;
     }
@@ -210,6 +211,7 @@ router.get('/getreservations', function(req, res, next) {
     connection.query(query, [user_id], function(err, rows, fields) {
       connection.release(); // release connection
       if (err) {
+        console.log(err);
         res.sendStatus(500);
         return;
       }
