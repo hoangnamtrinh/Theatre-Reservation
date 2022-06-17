@@ -6,7 +6,7 @@ function login() {
   xhttp.onreadystatechange = function () {
 
     if (this.readyState == 4 && this.status == 200) {
-      
+      getUser();
       window.location = '/home.html';
     } else if (this.readyState == 4 && this.status >= 400) {
       alert("Login Failed! Username or Password incorrect.");
@@ -58,4 +58,15 @@ function signup() {
   xhttp.open("POST", "/signup", true);
   xhttp.setRequestHeader("Content-type", "application/json");
   xhttp.send(JSON.stringify({ username: username, password: password }));
+}
+
+function getUser() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+    }
+  };
+
+  xhttp.open("GET", "/users", true);
+  xhttp.send();
 }
